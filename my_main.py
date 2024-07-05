@@ -78,7 +78,6 @@ print(f'Hi there!\n'
     )
 
 hidden_number=str(number_generator())
-show_number=print(number_generator())
 
 while True:
      user_guess=str(correction(user_input()))
