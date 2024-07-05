@@ -1,0 +1,7 @@
+cows_count = 0
+input_number=1789
+checked_number=7198
+for i in range(len(input_number)):
+    if input_number[i] != checked_number[i] and input_number[i] in checked_number:
+        cows_count += 1
+print(cows_count)
