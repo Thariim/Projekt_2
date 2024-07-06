@@ -67,7 +67,6 @@ def bulls(input_number, checked_number) -> int:
     bulls_count = 0
     for i in range(len(input_number)):
         if input_number[i] == checked_number[i]:
-            print(input_number[i],checked_number[i])
             bulls_count += 1
     return bulls_count
      
