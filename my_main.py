@@ -6,6 +6,7 @@ discord: thariim
 """
 import string
 from random import sample
+import os
 
 spacer='-'*47
 
@@ -81,6 +82,38 @@ def attempt(attempts) -> str:
         result=f'in {attempts} guesses!'
     return result
 
+def statistics_update(attempt):
+    '''
+    Pokud textový soubor 'statistics' neexistuje vytvoří jej, 
+    pokud existuje přidá do něj počet uživatelových pokusů.
+    '''
+    with open("statistics.txt", "a", encoding='UTF-8') as my_file:
+        my_file.write(str(attempt)+'\n')
+    
+
+def statistics_avarage() -> int:
+    '''
+    Funkce načte hodnoty předešlých pokusů a vytvoří z nich celkový průměr.
+    '''
+    my_file=open("statistics.txt", "r", encoding='UTF-8')
+    my_list=my_file.read().split('\n')
+    my_list=[line for line in my_list if line]
+    summary=[sum(int(ele) for ele in my_list)]
+    avarage=summary[0]/len(my_list)
+    return round(avarage)
+
+def statistics_result(user_number,avarage):
+    '''
+    Funkce vytvoří hlášku na bázi porovnání počtu uživatových pokusů a pokusů předešlých.
+    '''
+    result=''
+    if user_number < avarage:
+        result='amazing'
+    elif user_number == avarage:
+        result='avarage'
+    else:
+        result='not so good'
+    return result
 
 print(f'Hi there!\n'
     f'{spacer}\nI\'ve generated a random 4 digit number for you.\n'
@@ -89,18 +122,22 @@ print(f'Hi there!\n'
 
 hidden_number=hidden_generator()
 print(hidden_number)
+statistics_avarage()
 attempts=1
-
+    
 while True:
     input_str=input_correction(user_input())
     bull_cow=numOfBullsCows(input_str,hidden_number)
     
     if bull_cow[0] == 4:
         print(f'Correct, you\'ve guessed the right number {attempt(attempts)}')
+        statistics_update(attempts)
+        print(f'{spacer}\nThats\'s {statistics_result(attempts,statistics_avarage())}')
         break
     else:
         plural_singular(bull_cow)
         attempts+=1
+        
 
 
 
