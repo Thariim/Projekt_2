@@ -115,29 +115,30 @@ def statistics_result(user_number,avarage):
         result='not so good'
     return result
 
-print(f'Hi there!\n'
-    f'{spacer}\nI\'ve generated a random 4 digit number for you.\n'
-    'Let\'s play a bulls and cows game.'
-    )
+if __name__ == '__main__':
+    print(f'Hi there!\n'
+        f'{spacer}\nI\'ve generated a random 4 digit number for you.\n'
+        'Let\'s play a bulls and cows game.'
+        )
 
-hidden_number=hidden_generator()
-print(hidden_number)
-statistics_avarage()
-attempts=1
+    hidden_number=hidden_generator()
+    print(hidden_number)
+    statistics_avarage()
+    attempts=1
     
-while True:
-    input_str=input_correction(user_input())
-    bull_cow=numOfBullsCows(input_str,hidden_number)
-    
-    if bull_cow[0] == 4:
-        print(f'Correct, you\'ve guessed the right number {attempt(attempts)}')
-        statistics_update(attempts)
-        print(f'{spacer}\nThats\'s {statistics_result(attempts,statistics_avarage())}')
-        break
-    else:
-        plural_singular(bull_cow)
-        attempts+=1
+    while True:
+        input_str=input_correction(user_input())
+        bull_cow=numOfBullsCows(input_str,hidden_number)
         
+        if bull_cow[0] == 4:
+            print(f'Correct, you\'ve guessed the right number {attempt(attempts)}')
+            statistics_update(attempts)
+            print(f'{spacer}\nThats\'s {statistics_result(attempts,statistics_avarage())}')
+            break
+        else:
+            plural_singular(bull_cow)
+            attempts+=1
+            
 
 
 
