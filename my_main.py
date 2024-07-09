@@ -8,13 +8,25 @@ import string
 from random import sample
 import os
 
-spacer='-'*47
+def spacer() -> str:
+    '''
+    Funkce vztvori  rozdelovac '-----------------------------------------------'
+    '''
+    return '-'*47
+def welcome() -> str:
+    '''
+    Funkce vypise uvidni text uzivatelovi.
+    '''
+    print(f'Hi there!\n'
+        f'{spacer()}\nI\'ve generated a random 4 digit number for you.\n'
+        'Let\'s play a bulls and cows game.'
+        )
 
 def user_input() -> str:
     '''
     Funkce čistě pro sběr vstupu od uživatele.
     '''
-    return input(f'{spacer}\nEnter a 4-digit number without duplicate digits:\n{spacer}\n>>> ')
+    return input(f'{spacer()}\nEnter a 4-digit number without duplicate digits:\n{spacer()}\n>>> ')
 
 def input_correction(number) -> str:
     '''
@@ -116,11 +128,7 @@ def statistics_result(user_number,avarage):
     return result
 
 if __name__ == '__main__':
-    print(f'Hi there!\n'
-        f'{spacer}\nI\'ve generated a random 4 digit number for you.\n'
-        'Let\'s play a bulls and cows game.'
-        )
-
+    welcome()
     hidden_number=hidden_generator()
     print(hidden_number)
     statistics_avarage()
@@ -133,7 +141,7 @@ if __name__ == '__main__':
         if bull_cow[0] == 4:
             print(f'Correct, you\'ve guessed the right number {attempt(attempts)}')
             statistics_update(attempts)
-            print(f'{spacer}\nThats\'s {statistics_result(attempts,statistics_avarage())}')
+            print(f'{spacer()}\nThats\'s {statistics_result(attempts,statistics_avarage())}')
             break
         else:
             plural_singular(bull_cow)
