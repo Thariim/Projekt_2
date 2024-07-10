@@ -87,7 +87,7 @@ def attempt(user_attempts) -> str:
     Funkce zabezpečí aby počet pokusů byl zapsán ve správném tvaru.
     '''
     result=''
-    if attempts == 1:
+    if user_attempts == 1:
         result=f'in {user_attempts} guess!'
     else:
         result=f'in {user_attempts} guesses!'
@@ -126,7 +126,11 @@ def statistics_result(user_number,avarage):
         result='not so good'
     return result
 
-if __name__ == '__main__':
+def run():
+    '''
+    Finální funkce která všechny ostatní funkce dá do pohybu.
+    Dělá víc věcí... je pravděpodobně zbytečná... ale funguje.
+    '''
     welcome()
     generated_hidden_number=hidden_generator()
     print(generated_hidden_number)
@@ -145,7 +149,10 @@ if __name__ == '__main__':
         else:
             plural_singular(bull_cow)
             attempts+=1
-            
+
+
+if __name__ == '__main__':
+    run()
 
 
 
