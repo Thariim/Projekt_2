@@ -6,14 +6,13 @@ discord: thariim
 """
 import string
 from random import sample
-import os
 
 def spacer() -> str:
     '''
     Funkce vztvori  rozdelovac '-----------------------------------------------'
     '''
     return '-'*47
-def welcome() -> str:
+def welcome():
     '''
     Funkce vypise uvidni text uzivatelovi.
     '''
@@ -55,19 +54,19 @@ def hidden_generator() -> str:
         if hidden_number[0] != '0':
             return str(hidden_number)
 
-def numOfBullsCows(num:str,guess:str) -> list[int]: 
+def num_Of_Bulls_Cows(num:str,guess:str) -> list[int]: 
     '''
     Funkce vyhodnocuje kolik číslic z uživatelem zadané hodnoty se shoduje 
     s vygenerovaným číslem a kolik jich také sdílí i stejnou pozici.
     '''
-    bull_cow = [0,0] 
+    bull_and_cow = [0,0] 
     for i,j in zip(num,guess): 
         if i in guess: 
             if i == j: 
-                bull_cow[0] += 1
+                bull_and_cow[0] += 1
             else: 
-                bull_cow[1] += 1
-    return bull_cow 
+                bull_and_cow[1] += 1
+    return bull_and_cow 
 
 def plural_singular(bull_cows:list) -> None:
     '''
@@ -83,24 +82,24 @@ def plural_singular(bull_cows:list) -> None:
         cows_str=' cows'
     print(f'{bull_cows[0]} {bulls_str}, {bull_cows[1]} {cows_str}')
 
-def attempt(attempts) -> str:
+def attempt(user_attempts) -> str:
     '''
     Funkce zabezpečí aby počet pokusů byl zapsán ve správném tvaru.
     '''
     result=''
     if attempts == 1:
-        result=f'in {attempts} guess!'
+        result=f'in {user_attempts} guess!'
     else:
-        result=f'in {attempts} guesses!'
+        result=f'in {user_attempts} guesses!'
     return result
 
-def statistics_update(attempt):
+def statistics_update(user_attempts):
     '''
     Pokud textový soubor 'statistics' neexistuje vytvoří jej, 
     pokud existuje přidá do něj počet uživatelových pokusů.
     '''
     with open("statistics.txt", "a", encoding='UTF-8') as my_file:
-        my_file.write(str(attempt)+'\n')
+        my_file.write(str(user_attempts)+'\n')
     
 
 def statistics_avarage() -> int:
@@ -129,14 +128,14 @@ def statistics_result(user_number,avarage):
 
 if __name__ == '__main__':
     welcome()
-    hidden_number=hidden_generator()
-    print(hidden_number)
+    generated_hidden_number=hidden_generator()
+    print(generated_hidden_number)
     statistics_avarage()
     attempts=1
     
     while True:
         input_str=input_correction(user_input())
-        bull_cow=numOfBullsCows(input_str,hidden_number)
+        bull_cow=num_Of_Bulls_Cows(input_str,generated_hidden_number)
         
         if bull_cow[0] == 4:
             print(f'Correct, you\'ve guessed the right number {attempt(attempts)}')
